@@ -17,9 +17,7 @@ workflow {
     // create a channel for inputs from a CSV file
     sample_ch = Channel.fromPath(params.sample)
                         .splitCsv()
-                        .view {sample -> "Before split: $sample"}
                         .map { line -> line[0] }
-                        .view {sample -> "After split: $sample"}
     
     // Run sTELLeR on each sample
     STELLER(sample_ch, ref_file, te_ref_file, params.outdir, params.bamdir)
