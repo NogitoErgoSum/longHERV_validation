@@ -7,8 +7,10 @@ process STELLER {
 
     input:
         val sample
-        path outdir
         path ref_fasta
+        path te_ref_fasta
+        path outdir
+        path bamdir
     
     output:
         path "${sample}_repeats.vcf", emit: steller_out
@@ -16,10 +18,10 @@ process STELLER {
     script:
     """
     python /sTELLeR/steller/steller.py \
-        --ref $ref_fasta \
-        --bam /bams/${sample}.haplotagged.bam \
-        --TE_fasta /te_ref/TEsequences_SVA_HERV_ALU_L1.fasta \
+        --ref ${ref_fasta} \
+        --bam ${bamdir}/${sample}.haplotagged.bam \
+        --TE_fasta ${te_ref_fasta} \
         --style ont \
-        --output /output/${sample}
+        --output ${sample}
     """
 }

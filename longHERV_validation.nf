@@ -1,9 +1,13 @@
 #!/usr/bin/env nextflow
 
+include { STELLER } from './modules/STELLER.nf'
+
 /*
  * Pipeline parameters
  */
 params.sample = 'samples.txt'
+params.outdir = '/scratch/prj/ppn_als_longread/HERV_detection/nextflow_test/'
+params.bamdir = '/scratch/prj/ppn_als_longread/HERV_detection/aligned_BAMs/'
 
 workflow {
 
@@ -18,5 +22,5 @@ workflow {
                         .view {sample -> "After split: $sample"}
     
     // Run sTELLeR on each sample
-    STELLER(sample_ch)
+    STELLER(sample_ch, ref_file, te_ref_file, params.outdir, params.bamdir)
 }
