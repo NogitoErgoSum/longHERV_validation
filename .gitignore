@@ -1,0 +1,9 @@
+/work/
+.nextflow*
+/nextflow_test/
+samples.txt.bk
+xtea_sing.def
+/test_data/
+submit_nextflow.sh
+slurm-*.out
+report*.html

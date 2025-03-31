@@ -2,25 +2,24 @@
 
 process STELLER {
 
-    publishDir "${params.outdir}/${sample}/sTELLeR", mode: 'copy'
+    publishDir "${params.outdir}/${bam.simpleName}/sTELLeR", mode: 'copy'
     container 'docker://kristinebilgrav/steller'
 
     input:
-        val sample
+        tuple path(bam),path(bai)
         path ref_fasta
         path te_ref_fasta
-        path bamdir
     
     output:
-        path "${sample}_repeats.vcf"
+        path "${bam.simpleName}_repeats.vcf"
     
     script:
     """
     python /sTELLeR/steller/steller.py \
         --ref ${ref_fasta} \
-        --bam ${bamdir}/${sample}.haplotagged.bam \
+        --bam ${bam} \
         --TE_fasta ${te_ref_fasta} \
         --style ont \
-        --output ${sample}
+        --output ${bam.simpleName}
     """
 }

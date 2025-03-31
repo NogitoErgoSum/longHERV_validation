@@ -2,25 +2,23 @@
 
 process TLDR {
 
-    publishDir "${params.outdir}/${sample}/TLDR", mode: 'copy'
-    // container 'docker://quay.io/sarahbeecroft9/tldr'
-    conda '/users/k2140993/.conda/envs/tldr'
+    publishDir "${params.outdir}/${bam.simpleName}/TLDR", mode: 'copy'
+    container 'docker://quay.io/sarahbeecroft9/tldr'
 
     input:
-        val sample
+        tuple path(bam),path(bai)
         path ref_fasta
         path te_ref_fasta
-        path bamdir
     
     output:
-        path "${sample}.haplotagged.table.txt"
+        path "${bam.simpleName}.haplotagged.table.txt"
     
     script:
     """
     tldr\
-        -b ${bamdir}/${sample}.haplotagged.bam \
+        -b ${bam} \
         -e ${te_ref_fasta} \
         -r ${ref_fasta} \
-        -p 16
+        -p 8
     """
 }

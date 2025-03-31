@@ -1,3 +1,1 @@
-testdata
-testdata2
-
+/scratch/prj/ppn_als_longread/HERV_detection/aligned_BAMs/A046_12_sup.haplotagged.bam
