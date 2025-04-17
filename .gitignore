@@ -7,3 +7,4 @@ xtea_sing.def
 submit_nextflow.sh
 slurm-*.out
 report*.html
+remove_work.sh

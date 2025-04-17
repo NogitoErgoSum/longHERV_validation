@@ -3,7 +3,6 @@
 process PALMER {
 
     publishDir "${params.outdir}/${bam.simpleName}/PALMER", mode: 'copy'
-    container 'docker://quay.io/ymostovoy/lr-palmer'
 
     input:
         tuple path(bam),path(bai)

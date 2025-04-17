@@ -3,7 +3,6 @@
 process XTEA {
 
     publishDir "${params.outdir}/${bam.simpleName}/XTEA", mode: 'copy'
-    container 'docker://quay.io/ymostovoy/lr-xtea'
 
     input:
         tuple path(bam),path(bai)

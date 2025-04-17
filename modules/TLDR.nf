@@ -3,7 +3,6 @@
 process TLDR {
 
     publishDir "${params.outdir}/${bam.simpleName}/TLDR", mode: 'copy'
-    container 'docker://quay.io/sarahbeecroft9/tldr'
 
     input:
         tuple path(bam),path(bai)

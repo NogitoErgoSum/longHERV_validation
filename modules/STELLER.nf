@@ -3,7 +3,6 @@
 process STELLER {
 
     publishDir "${params.outdir}/${bam.simpleName}/sTELLeR", mode: 'copy'
-    container 'docker://kristinebilgrav/steller'
 
     input:
         tuple path(bam),path(bai)
