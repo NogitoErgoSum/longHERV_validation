@@ -2,7 +2,7 @@
 
 include { STELLER } from './modules/STELLER.nf'
 include { TLDR } from './modules/TLDR.nf'
-include { PALMER } from './modules/PALMER.nf'
+include { PALMER as PALMER_L1; PALMER as PALMER_ALU; PALMER as PALMER_HERV; PALMER as PALMER_SVA} from './modules/PALMER.nf'
 include { XTEA } from './modules/XTEA.nf'
 
 /*
@@ -14,6 +14,10 @@ workflow {
 
     ref_file        = file(params.ref_fasta)
     te_ref_file     = file(params.te_ref)
+    alu_ref_file    = file(params.alu_ref)
+    herv_ref_file    = file(params.herv_ref)
+    sva_ref_file    = file(params.sva_ref)
+    l1_ref_file    = file(params.l1_ref)
 
     // create a channel for inputs from a CSV file
     sample_ch = Channel.fromPath(params.samplefile)
@@ -28,8 +32,14 @@ workflow {
     STELLER(sample_ch, ref_file, te_ref_file)
     // Run TLDR on each sample
     TLDR(sample_ch, ref_file, te_ref_file)
-    // Run PALMER on each sample
-    PALMER(sample_ch, ref_file, te_ref_file)
+    // Run PALMER for ALUs on each sample
+    PALMER_ALU(sample_ch, ref_file, alu_ref_file, "ALU")
+    // Run PALMER for L1s on each sample
+    PALMER_L1(sample_ch, ref_file, l1_ref_file, "L1")
+    // Run PALMER for SVAs on each sample
+    PALMER_SVA(sample_ch, ref_file, sva_ref_file, "SVA")
+    // Run PALMER for HERVs on each sample
+    PALMER_HERV(sample_ch, ref_file, herv_ref_file, "HERV")
     // Run XTEA on each sample
     XTEA(sample_ch, ref_file, te_ref_file)
 }

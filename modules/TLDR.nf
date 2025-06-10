@@ -18,6 +18,6 @@ process TLDR {
         -b ${bam} \
         -e ${te_ref_fasta} \
         -r ${ref_fasta} \
-        -p 8
+        -p $task.cpus
     """
 }

@@ -11,6 +11,9 @@ process XTEA {
     
     output:
         path "${bam.simpleName}classified_results.txt.merged_HERV.txt"
+        path "${bam.simpleName}classified_results.txt.merged_ALU.txt"
+        path "${bam.simpleName}classified_results.txt.merged_LINE1.txt"
+        path "${bam.simpleName}classified_results.txt.merged_SVA.txt"
     
     script:
     """
@@ -44,7 +47,7 @@ process XTEA {
         -r ${ref_fasta} \
         -p \${TMP} \
         -o ${bam.simpleName}"candidate_list_from_clip.txt"  \
-        -n 16 \
+        -n ${task.cpus} \
         -w 75 
     python \${XTEA_PATH}"l_main.py" -A \
         -b \${BAM_LIST} \
@@ -53,7 +56,7 @@ process XTEA {
         -i ${bam.simpleName}"candidate_list_from_clip.txt" \
         -o ${bam.simpleName}"all_ins_seqs.fa" \
         --rep \${REP_LIB} \
-        -n 16 
+        -n ${task.cpus}
     python \${XTEA_PATH}"l_main.py" -N \
         -b \${BAM_LIST} \
         -r ${ref_fasta} \
@@ -62,7 +65,7 @@ process XTEA {
         --rmsk \${REP_LIB}/LINE/hg38/hg38_L1_larger_500_with_all_L1HS.out \
         --cns \${REP_LIB}/consensus/LINE1.fa \
         --min 4000 \
-        -n 16
+        -n ${task.cpus}
     python \${XTEA_PATH}"l_main.py" -Y \
         -i ${bam.simpleName}"all_ins_seqs.fa" \
         -r ${ref_fasta} \
@@ -70,12 +73,12 @@ process XTEA {
         --rep \${REP_LIB} \
         -y 4 \
         -o ${bam.simpleName}"classified_results.txt" \
-        -n 16
+        -n ${task.cpus}
     python \${XTEA_PATH}"l_main.py" --clean \
         -b \${BAM_LIST} \
         -r ${ref_fasta} \
         -p \${TMP} \
         -i ${bam.simpleName}"candidate_list_from_clip.txt"  \
-        -n 16
+        -n ${task.cpus}
     """
 }

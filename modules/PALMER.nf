@@ -2,13 +2,14 @@
 
 process PALMER {
 
-    publishDir "${params.outdir}/${bam.simpleName}/PALMER", mode: 'copy'
+    publishDir "${params.outdir}/${bam.simpleName}/PALMER/${te_family}/", mode: 'copy'
 
     input:
         tuple path(bam),path(bai)
         path ref_fasta
         path te_ref_fasta
-    
+        val te_family
+
     output:
         path "${bam.simpleName}_calls.txt"
         path "${bam.simpleName}_TSD_reads.txt"
