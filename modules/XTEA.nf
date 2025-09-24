@@ -71,7 +71,7 @@ process XTEA {
         -r ${ref_fasta} \
         -p \${TMP}"classification" \
         --rep \${REP_LIB} \
-        -y 4 \
+        -y 15 \
         -o ${bam.simpleName}"classified_results.txt" \
         -n ${task.cpus}
     python \${XTEA_PATH}"l_main.py" --clean \

@@ -9,6 +9,7 @@ include { XTEA } from './modules/XTEA.nf'
  * Pipeline parameters
  */
 params.samplefile = 'samples.txt'
+params.mode = 'all'
 
 workflow {
 
@@ -28,18 +29,55 @@ workflow {
                             tuple(bam, bai)
                        }
     
-    // Run sTELLeR on each sample
-    STELLER(sample_ch, ref_file, te_ref_file)
-    // Run TLDR on each sample
-    TLDR(sample_ch, ref_file, te_ref_file)
-    // Run PALMER for ALUs on each sample
-    PALMER_ALU(sample_ch, ref_file, alu_ref_file, "ALU")
-    // Run PALMER for L1s on each sample
-    PALMER_L1(sample_ch, ref_file, l1_ref_file, "L1")
-    // Run PALMER for SVAs on each sample
-    PALMER_SVA(sample_ch, ref_file, sva_ref_file, "SVA")
-    // Run PALMER for HERVs on each sample
-    PALMER_HERV(sample_ch, ref_file, herv_ref_file, "HERV")
-    // Run XTEA on each sample
-    XTEA(sample_ch, ref_file, te_ref_file)
+    if ( params.mode == "steller") {
+        // Run sTELLeR on each sample
+        STELLER(sample_ch, ref_file, te_ref_file)
+    }
+    
+    else if ( params.mode == "tldr") {
+        // Run TLDR on each sample
+        TLDR(sample_ch, ref_file, te_ref_file)
+    }
+
+    else if ( params.mode == "palmer_alu") {
+        // Run PALMER for ALUs on each sample
+        PALMER_ALU(sample_ch, ref_file, alu_ref_file, "ALU")
+    }
+
+    else if ( params.mode == "palmer_l1") {
+        // Run PALMER for L1s on each sample
+        PALMER_L1(sample_ch, ref_file, l1_ref_file, "L1")
+    }
+
+    else if ( params.mode == "palmer_sva") {
+        // Run PALMER for SVAs on each sample
+        PALMER_SVA(sample_ch, ref_file, l1_ref_file, "SVA")
+    }
+
+    else if ( params.mode == "palmer_herv") {
+        // Run PALMER for HERVs on each sample
+        PALMER_HERV(sample_ch, ref_file, l1_ref_file, "HERV")
+    }
+
+    else if ( params.mode == "xtea") {
+        // Run XTEA on each sample
+        XTEA(sample_ch, ref_file, te_ref_file)
+    }
+
+    else {
+        // Run sTELLeR on each sample
+        STELLER(sample_ch, ref_file, te_ref_file)
+        // Run TLDR on each sample
+        TLDR(sample_ch, ref_file, te_ref_file)
+        // Run PALMER for ALUs on each sample
+        PALMER_ALU(sample_ch, ref_file, alu_ref_file, "ALU")
+        // Run PALMER for L1s on each sample
+        PALMER_L1(sample_ch, ref_file, l1_ref_file, "L1")
+        // Run PALMER for SVAs on each sample
+        PALMER_SVA(sample_ch, ref_file, sva_ref_file, "SVA")
+        // Run PALMER for HERVs on each sample
+        PALMER_HERV(sample_ch, ref_file, herv_ref_file, "HERV")
+        // Run XTEA on each sample
+        XTEA(sample_ch, ref_file, te_ref_file)
+    }
 }
