@@ -7,5 +7,5 @@ submit_nextflow.sh
 slurm-*.out
 report*.html
 remove_work.sh
-trace*.txt
+trace-*.txt
 *.bk
