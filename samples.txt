@@ -1,5 +1,1 @@
-/scratch/prj/ppn_als_longread/HERV_detection/aligned_BAMs/A149_01_sup.haplotagged.bam
-/scratch/prj/ppn_als_longread/HERV_detection/aligned_BAMs/A153_06_sup.haplotagged.bam
-/scratch/prj/ppn_als_longread/HERV_detection/aligned_BAMs/A154_04_sup.haplotagged.bam
-/scratch/prj/ppn_als_longread/HERV_detection/aligned_BAMs/A160_96_sup.haplotagged.bam
-/scratch/prj/ppn_als_longread/HERV_detection/aligned_BAMs/A162_09_sup.haplotagged.bam
+/scratch/prj/ppn_als_longread/HERV_detection/BB_aligned_BAMs/A103_17.haplotagged.bam

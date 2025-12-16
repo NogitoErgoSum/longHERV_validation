@@ -1,12 +1,13 @@
 #!/usr/bin/env nextflow
 
 process STELLER {
+    tag "$sample_id"
 
     publishDir "${params.outdir}/${bam.simpleName}/sTELLeR", mode: 'copy', pattern: '*.vcf'
     publishDir "${params.outdir}/${bam.simpleName}/sTELLeR/fasta", mode: 'copy', pattern: '*.fasta'
 
     input:
-        tuple path(bam),path(bai)
+        tuple path(bam),path(bai), val(sample_id)
         path ref_fasta
         path te_ref_fasta
     

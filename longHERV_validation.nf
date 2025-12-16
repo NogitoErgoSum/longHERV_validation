@@ -31,7 +31,8 @@ workflow {
                         .map { line -> 
                             def bam = file(line[0])             // BAM file
                             def bai = file(line[0] + ".bai")    // BAM index file
-                            tuple(bam, bai)
+                            def sample_id = bam.baseName
+                            tuple(bam, bai, sample_id)
                        }
     
     if ( params.mode == "steller") {

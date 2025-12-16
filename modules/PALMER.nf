@@ -3,9 +3,10 @@
 process PALMER {
 
     publishDir "${params.outdir}/${bam.simpleName}/PALMER/${te_family}/", mode: 'copy'
+    tag "$sample_id"
 
     input:
-        tuple path(bam),path(bai)
+        tuple path(bam),path(bai), val(sample_id)
         path ref_fasta
         path te_ref_fasta
         val te_family

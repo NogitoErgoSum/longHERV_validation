@@ -1,1 +1,2 @@
 /scratch/prj/ppn_als_longread/HERV_detection/longHERV_validation/test_data/testdata.haplotagged.bam
+/scratch/prj/ppn_als_longread/HERV_detection/longHERV_validation/test_data/testdata2.haplotagged.bam
