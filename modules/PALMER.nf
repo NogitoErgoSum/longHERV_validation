@@ -1,7 +1,6 @@
 #!/usr/bin/env nextflow
 
 process PALMER {
-
     publishDir "${params.outdir}/${bam.simpleName}/PALMER/${te_family}/", mode: 'copy'
     tag "$sample_id"
 
@@ -17,6 +16,8 @@ process PALMER {
     
     script:
     """
+    te_len=\$(( \$(wc -c < ${te_ref_fasta}) / \$(grep -o '>' ${te_ref_fasta} | wc -l) ))
+    
     /PALMER/PALMER \
         --input ${bam} \
         --workdir ./ \
@@ -24,8 +25,12 @@ process PALMER {
         --ref_fa ${ref_fasta} \
         --output ${bam.simpleName} \
         --type CUSTOMIZED \
+        --TSD_finding TRUE \
+        --len_custom_seq \$te_len \
+        --thread ${task.cpus ?: 1} \
         --mode raw \
         --chr ALL \
-        --custom_seq ${te_ref_fasta}
+        --custom_seq ${te_ref_fasta} \
+        --intermediate 0
     """
 }
