@@ -1,8 +1,8 @@
 /work/
+/tmp/
 .nextflow*
 /nextflow_test/
 xtea_sing.def
-/test_data/
 submit_nextflow.sh
 slurm-*.out
 report*.html
@@ -10,4 +10,11 @@ remove_work.sh
 trace-*.txt
 *.bk
 /output/
-missing_samples.txt
+missing_*.txt
+/graffite_*out/
+graffite.config
+telr_test_samples.txt
+/default_ref_output/
+.vscode
+longread*.csv
+nextflow.config.shrt

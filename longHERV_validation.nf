@@ -7,6 +7,8 @@ include { XTEA } from './modules/XTEA.nf'
 include { BAM2FASTQ } from './modules/BAM2FASTQ.nf'
 include { TREMOLO } from './modules/TREMOLO.nf'
 include { PREP_TREMOLO } from './modules/PREP_TREMOLO.nf'
+include { LOCATE } from './modules/LOCATE.nf'
+include { TELR } from './modules/TELR.nf'
 
 /*
  * Pipeline parameters
@@ -24,6 +26,7 @@ workflow {
     l1_ref_file             = file(params.l1_ref)
     tremolo_config_file     = file(params.tremolo_config)
     tremolo_snk_file        = file(params.tremolo_snk)
+    locate_dir              = file(params.locate_resource_dir)
 
     // create a channel for inputs from a CSV file
     sample_ch = Channel.fromPath(params.samplefile)
@@ -43,6 +46,11 @@ workflow {
     else if ( params.mode == "tldr") {
         // Run TLDR on each sample
         TLDR(sample_ch, ref_file, te_ref_file)
+    }
+
+    else if ( params.mode == "telr") {
+        // Run TLDR on each sample
+        TELR(sample_ch, ref_file, te_ref_file)
     }
 
     else if ( params.mode == "palmer_alu") {
@@ -81,7 +89,7 @@ workflow {
         XTEA(sample_ch, ref_file, te_ref_file)
     }
 
-    else if ( params.mode == "tremolo") {
+    else if ( params.mode == "tremolo" ) {
         // Convert bams to fastq
         BAM2FASTQ(sample_ch)
         // Create config and yaml files
@@ -90,11 +98,18 @@ workflow {
         TREMOLO(BAM2FASTQ.out.fastq, ref_file, te_ref_file, PREP_TREMOLO.out.tremoloConfig, PREP_TREMOLO.out.tremoloSnk)
     }
 
+    else if ( params.mode == "locate" ) {
+        // Run LOCATE on each sample
+        LOCATE(sample_ch, ref_file)
+    }
+
     else {
         // Run sTELLeR on each sample
         STELLER(sample_ch, ref_file, te_ref_file)
         // Run TLDR on each sample
         TLDR(sample_ch, ref_file, te_ref_file)
+        // Run TELR on each sample
+        TELR(sample_ch, ref_file, te_ref_file)
         // Run PALMER for ALUs on each sample
         PALMER_ALU(sample_ch, ref_file, alu_ref_file, "ALU")
         // Run PALMER for L1s on each sample

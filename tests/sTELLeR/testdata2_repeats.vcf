@@ -1,0 +1,40 @@
+##fileformat=VCFv4.1
+##source=sTELLeRv0
+##INFO=<ID=SVTYPE,Number=1,Type=String,Description="Type of structural variant">
+##INFO=<ID=MEINFO,Number=4,Type=String,Description="Mobile element info of the form NAME,START,END,REFME/NOVEL">
+##contig=<ID=1,length=204096120>
+##contig=<ID=2,length=218861132>
+##contig=<ID=3,length=180819410>
+##contig=<ID=4,length=175537859>
+##contig=<ID=5,length=166397866>
+##contig=<ID=6,length=154905844>
+##contig=<ID=7,length=141084138>
+##contig=<ID=8,length=132051627>
+##contig=<ID=9,length=109217599>
+##contig=<ID=10,length=118948682>
+##contig=<ID=11,length=122127499>
+##contig=<ID=12,length=117981328>
+##contig=<ID=13,length=90446877>
+##contig=<ID=14,length=81207962>
+##contig=<ID=15,length=74670879>
+##contig=<ID=16,length=68869507>
+##contig=<ID=17,length=68127370>
+##contig=<ID=18,length=73765737>
+##contig=<ID=19,length=44032271>
+##contig=<ID=20,length=56431294>
+##contig=<ID=21,length=36591575>
+##contig=<ID=22,length=32797125>
+##contig=<ID=X,length=142675204>
+##contig=<ID=Y,length=21894099>
+##FORMAT=<ID=TS,Number=1,Type=String,Description="Transposon start">
+##FORMAT=<ID=TE,Number=1,Type=String,Description="Transposable element">
+##FORMAT=<ID=HT,Number=1,Type=String,Description="Haplotag">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	testdata2
+22	20319611	.	G	<INS:ME>	.	.	MEINFO=L1:L1,20319611,20331358;SVTPE=INS	TE:TS:HT:GT	L1:L1:20319611:0:1/1
+22	20435855	.	C	<INS:ME>	.	.	MEINFO=Alu:AluY,20435855,20436184;SVTPE=INS	TE:TS:HT:GT	Alu:AluY:20435855:0:1/1
+22	20745272	.	T	<INS:ME>	.	.	MEINFO=L1:L1,20745272,20765327;SVTPE=INS	TE:TS:HT:GT	L1:L1:20745272:0:1/1
+22	21282431	.	T	<INS:ME>	.	.	MEINFO=Alu:AluY,21282431,21282752;SVTPE=INS	TE:TS:HT:GT	Alu:AluY:21282431:0:1/1
+22	21330325	.	C	<INS:ME>	.	.	MEINFO=Alu:AluY,21330325,21330819;SVTPE=INS	TE:TS:HT:GT	Alu:AluY:21330325:0:1/1
+22	21432726	.	A	<INS:ME>	.	.	MEINFO=L1:L1,21432726,21434882;SVTPE=INS	TE:TS:HT:GT	L1:L1:21432726:0:1/1
+22	21692996	.	C	<INS:ME>	.	.	MEINFO=Alu:AluY,21692996,21693316;SVTPE=INS	TE:TS:HT:GT	Alu:AluY:21692996:0:1/1
