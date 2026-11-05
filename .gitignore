@@ -21,3 +21,4 @@ nextflow.config.shrt
 /tests/refgenome.tar.gz
 /tests/sTELLeR/
 /tests/sTELLeR_supplementary/
+/results_debug/
