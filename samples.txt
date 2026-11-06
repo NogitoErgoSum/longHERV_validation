@@ -1,1 +1,0 @@
-/scratch/prj/ppn_als_longread/HERV_detection/BB_aligned_BAMs/A149_01.haplotagged.bam
