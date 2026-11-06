@@ -25,12 +25,11 @@ jobs:
       fail-fast: false # one broken tool shouldn't hide the others
       matrix:
         # Not run here: tremolo (Singularity-only image), locate (needs the
-        # GRCh38 resource dir), telr (conda env needs a patch).
+        # GRCh38 resource dir), telr (conda env needs a patch), xtea (no tests get found in the test data).
         mode:
           - steller
           - tldr
           - palmer
-          - xtea
 
     steps:
       - name: Check out repository
