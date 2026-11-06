@@ -45,7 +45,7 @@ jobs:
       - name: Set up Nextflow
         uses: nf-core/setup-nextflow@v2
         with:
-          version: latest-stable
+          version: 26.04.0
 
       - name: Run pipeline (${{ matrix.mode }})
         run: |
