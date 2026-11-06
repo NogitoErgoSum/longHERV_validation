@@ -6,6 +6,9 @@ on:
   push:
     paths-ignore:
       - "README.md"
+  pull_request: 
+    paths-ignore:
+      - "README.md"
     branches: [main]
   workflow_dispatch:
 
@@ -47,7 +50,7 @@ jobs:
       - name: Run pipeline (${{ matrix.mode }})
         run: |
           nextflow run longHERV_validation.nf \
-            -profile debug \
+            -profile test,docker \
             --mode ${{ matrix.mode }}
 
       - name: Collect task logs
@@ -67,7 +70,7 @@ jobs:
         with:
           name: ${{ matrix.mode }}
           path: |
-            results_debug/
+            results_test/
             ci_logs/
           if-no-files-found: ignore
           retention-days: 14
