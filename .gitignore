@@ -3,11 +3,12 @@
 .nextflow*
 /nextflow_test/
 xtea_sing.def
-submit_nextflow.sh
+samples*.txt
+submit_*.sh
 slurm-*.out
 report*.html
 remove_work.sh
-trace-*.txt
+trace*.txt
 *.bk
 /output/
 missing_*.txt
