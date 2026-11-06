@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 process XTEA {
-    publishDir "${params.outdir}/${bam.simpleName}/XTEA", mode: 'copy'
+    publishDir path: { "${params.outdir}/${bam.simpleName}/XTEA" }, mode: 'copy'
     
     tag "$sample_id"
 

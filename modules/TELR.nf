@@ -28,7 +28,7 @@ process TELR {
 
     tag "$sample_id"
 
-    publishDir "${params.outdir}/${bam.simpleName}/TELR", mode: 'copy'
+    publishDir path: { "${params.outdir}/${bam.simpleName}/TELR" }, mode: 'copy'
 
     input:
         tuple path(bam),path(bai), val(sample_id)

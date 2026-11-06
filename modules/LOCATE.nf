@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 process LOCATE {
-    publishDir "${params.outdir}/${bam.simpleName}/LOCATE", mode: 'copy', saveAs: { filename -> "${sample_id}_${filename}" }
+    publishDir path: { "${params.outdir}/${bam.simpleName}/LOCATE" }, mode: 'copy', saveAs: { filename -> "${sample_id}_${filename}" }
     
     tag "$sample_id"
 

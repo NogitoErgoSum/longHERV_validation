@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 process PALMER {
-    publishDir "${params.outdir}/${bam.simpleName}/PALMER/${te_family}/", mode: 'copy'
+    publishDir path: { "${params.outdir}/${bam.simpleName}/PALMER/${te_family}/" }, mode: 'copy'
     
     tag "$sample_id"
 

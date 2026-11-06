@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 
 process STELLER {
-    publishDir "${params.outdir}/${bam.simpleName}/sTELLeR", mode: 'copy', pattern: '*.vcf'
-    publishDir "${params.outdir}/${bam.simpleName}/sTELLeR/fasta", mode: 'copy', pattern: '*.fasta'
-    
+    publishDir path: { "${params.outdir}/${bam.simpleName}/sTELLeR" }, mode: 'copy', pattern: '*.vcf'
+    publishDir path: { "${params.outdir}/${bam.simpleName}/sTELLeR/fasta" }, mode: 'copy', pattern: '*.fasta'
+
     tag "$sample_id"
 
     container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container

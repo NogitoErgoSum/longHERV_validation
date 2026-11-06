@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 process TLDR {
-    publishDir "${params.outdir}/${bam.simpleName}/TLDR", mode: 'copy'
+    publishDir path: { "${params.outdir}/${bam.simpleName}/TLDR" }, mode: 'copy'
     
     tag "$sample_id"
 
