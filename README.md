@@ -4,6 +4,5 @@
 [![License: MIT](https://img.shields.io/github/license/NogitoErgoSum/longHERV_validation)](LICENSE)
 ![Repo Size](https://img.shields.io/github/repo-size/Sulstice/global-chem)
 [![bioRxiv](https://img.shields.io/badge/bioRxiv-10.1101%2F2025.09.29.679192-b31b1b)](https://doi.org/10.1101/2025.09.29.679192)
-[![Release](https://img.shields.io/github/v/release/NogitoErgoSum/longHERV_validation)](https://github.com/NogitoErgoSum/longHERV_validation/releases)
 
 ![250918_nf_workflow_noTREMOLO](https://github.com/user-attachments/assets/6cc2d1ca-16ed-424f-b819-bf017b5007ab)
