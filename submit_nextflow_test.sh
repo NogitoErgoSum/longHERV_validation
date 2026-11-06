@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --job-name=nf_submit
+#SBATCH --job-name=nf_test
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=celgene_cpu
@@ -16,4 +16,4 @@ module load nextflow
 # --ref_fasta /scratch/prj/ppn_als_longread/HERV_detection/telr_test_data/ref_38kb.fasta \
 # --samplefile telr_test_samples.txt
 
-nextflow run longHERV_validation.nf -profile test --mode telr
+nextflow run longHERV_validation.nf -profile test,singularity,create

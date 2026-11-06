@@ -1,0 +1,74 @@
+name: CI
+
+# Runs the pipeline on the small chr22 test data in tests/data/
+# using the `debug` profile (local executor + Docker).
+on:
+  push:
+    paths-ignore:
+      - "README.md"
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ${{ matrix.mode }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false # one broken tool shouldn't hide the others
+      matrix:
+        # Not run here: tremolo (Singularity-only image), locate (needs the
+        # GRCh38 resource dir), telr (conda env needs a patch).
+        mode:
+          - steller
+          - tldr
+          - palmer_herv
+          - xtea
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Nextflow
+        uses: nf-core/setup-nextflow@v2
+        with:
+          version: latest-stable
+
+      - name: Run pipeline (${{ matrix.mode }})
+        run: |
+          nextflow run longHERV_validation.nf \
+            -profile debug \
+            --mode ${{ matrix.mode }}
+
+      - name: Collect task logs
+        if: always()
+        run: |
+          mkdir -p ci_logs
+          cp .nextflow.log ci_logs/ 2>/dev/null || true
+          # keep the .command.* files of every task so failures can be read
+          find work -name '.command.*' -o -name '.exitcode' 2>/dev/null \
+            | while read -r f; do
+                d="ci_logs/$(dirname "$f")"; mkdir -p "$d"; cp "$f" "$d/"
+              done
+
+      - name: Upload results and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.mode }}
+          path: |
+            results_debug/
+            ci_logs/
+          if-no-files-found: ignore
+          retention-days: 14

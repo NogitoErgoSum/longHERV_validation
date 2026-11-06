@@ -1,9 +1,13 @@
 #!/usr/bin/env nextflow
 
 process TLDR {
+    publishDir "${params.outdir}/${bam.simpleName}/TLDR", mode: 'copy'
+    
     tag "$sample_id"
 
-    publishDir "${params.outdir}/${bam.simpleName}/TLDR", mode: 'copy'
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+        ? 'docker://quay.io/sarahbeecroft9/tldr'
+        : 'quay.io/sarahbeecroft9/tldr'}"
 
     input:
         tuple path(bam),path(bai), val(sample_id)

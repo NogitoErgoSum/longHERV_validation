@@ -1,9 +1,13 @@
 #!/usr/bin/env nextflow
 
 process XTEA {
+    publishDir "${params.outdir}/${bam.simpleName}/XTEA", mode: 'copy'
+    
     tag "$sample_id"
 
-    publishDir "${params.outdir}/${bam.simpleName}/XTEA", mode: 'copy'
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+        ? 'docker://quay.io/ymostovoy/lr-xtea'
+        : 'quay.io/ymostovoy/lr-xtea'}"
 
     input:
         tuple path(bam),path(bai), val(sample_id)

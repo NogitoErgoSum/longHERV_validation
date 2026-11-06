@@ -2,7 +2,12 @@
 
 process PALMER {
     publishDir "${params.outdir}/${bam.simpleName}/PALMER/${te_family}/", mode: 'copy'
+    
     tag "$sample_id"
+
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+        ? 'docker://quay.io/ymostovoy/lr-palmer'
+        : 'quay.io/ymostovoy/lr-palmer'}"
 
     input:
         tuple path(bam),path(bai), val(sample_id)

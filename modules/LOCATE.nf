@@ -1,9 +1,13 @@
 #!/usr/bin/env nextflow
 
 process LOCATE {
+    publishDir "${params.outdir}/${bam.simpleName}/LOCATE", mode: 'copy', saveAs: { filename -> "${sample_id}_${filename}" }
+    
     tag "$sample_id"
 
-    publishDir "${params.outdir}/${bam.simpleName}/LOCATE", mode: 'copy', saveAs: { filename -> "${sample_id}_${filename}" }
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+        ? 'docker://huzr14830/locate'
+        : 'huzr14830/locate'}"
 
     input:
         tuple path(bam),path(bai), val(sample_id)

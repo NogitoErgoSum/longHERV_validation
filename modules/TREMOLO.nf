@@ -1,7 +1,6 @@
 #!/usr/bin/env nextflow
 
 process TREMOLO {
-
     publishDir "${params.outdir}/${fastq.simpleName}/TrEMOLO/", mode: 'copy'
 
     input:
