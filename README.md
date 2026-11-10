@@ -107,7 +107,7 @@ results/
 
 ## Testing
 
-On every push to `main`, [GitHub Actions](.github/workflows/ci.yml) runs each tool on the test data with `-profile test,docker`. TrEMOLO, LOCATE and TELR are not part of CI because they need a Singularity-only image, a large external resource directory and a patched Conda environment, respectively.
+On every push to `main`, [GitHub Actions](.github/workflows/ci.yml) runs two tools on the test data with `-profile test,docker`. TrEMOLO, LOCATE and TELR are not part of CI because they need a Singularity-only image, a large external resource directory and a patched Conda environment, respectively. PALMER is also not included as it takes about an hour to run on the test data. 
 
 ## Citation
 
