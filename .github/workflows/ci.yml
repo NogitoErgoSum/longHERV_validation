@@ -29,8 +29,6 @@ jobs:
         mode:
           - steller
           - tldr
-          - palmer
-
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
